@@ -1,4 +1,3 @@
 #include <stdio.h>
 
-char mango[11] = "helloworld";
-
+char mango[11] = "elloworld";

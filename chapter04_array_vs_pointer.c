@@ -8,8 +8,19 @@
 int main(void)
 {
      extern char *mango; // must have this, otherwise "error: 'mango' undelcared"
-     int orange[100] = {[1]=101};
 
+     // Actually, as long as you re-declare
+     // mango as a VARIABLE and a pointer, instead of an array,
+     // you could get the value of of the first BYTE the orignial array
+     //extern char *mango; // this works, as expected
+     //extern int *mango;  // this works, as expected
+     //extern float *mango;  // this works, as expected
+
+     // Some experiment as below,
+     // I guess it's "undefined behavior"
+     //extern char mango; // this works, as expected
+     //extern int mango; // this works, I don't know why
+     //extern float mango;// this doesn't work, I could be sure why.
 
     // 1."mango" would be substituted by an address value, say <9890>,
     //
@@ -19,12 +30,19 @@ int main(void)
     //
     // 3.Using "mango" alone as below would yield the value
     // of the variable instead of the address of the variable(as all varialbes),
-    // which is 'h'('\0x68'). And that's why the following statement would print 'h' successfully.
+    // which is 'h'('\0x68'). <-- this explanation has a problem, see below
+    // == however, the value of the variable is deduced by the address and the
+    // == type at the same time, so if "mango" is regardes as a pointer variable,
+    // == 8 bytes from <9890> should be read, and the value of that 8 bytes
+    // == won't be 'h'('\x68') anymore.
+    // == So I guess it's just "undefined behavior", which leads to
+    // == only the single byte at <9890> is read and passed to "%c".
+    // == And that's why the following statement would print 'h' successfully.
     printf("mango[1] == %c\n", mango);
+
     // 4. And that's also why the follwing statement will cause "segmentation fault"
     // (because it says *(\x68+0), which is dereferencing a location not allocated to the program.)
-    printf("mango[1] == %c\n", mango[0]);
-    printf("orange[1] == %d\n", orange[1]);
+    //printf("mango[1] == %c\n", mango[0]);
 
     return 0;
 }
