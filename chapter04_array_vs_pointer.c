@@ -11,7 +11,7 @@ int main(void)
 
      // Actually, as long as you re-declare
      // mango as a VARIABLE and a pointer, instead of an array,
-     // you could get the value of of the first BYTE the orignial array
+     // you could get the value of of the first BYTE of the orignial array
      //extern char *mango; // this works, as expected
      //extern int *mango;  // this works, as expected
      //extern float *mango;  // this works, as expected
@@ -36,7 +36,7 @@ int main(void)
     // == 8 bytes from <9890> should be read, and the value of that 8 bytes
     // == won't be 'h'('\x68') anymore.
     // == So I guess it's just "undefined behavior", which leads to
-    // == only the single byte at <9890> is read and passed to "%c".
+    // == that only the single byte at <9890> is read and passed to "%c".
     // == And that's why the following statement would print 'h' successfully.
     printf("mango[1] == %c\n", mango);
 
