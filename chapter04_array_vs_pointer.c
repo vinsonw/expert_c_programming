@@ -20,7 +20,7 @@ int main(void)
      // I guess it's "undefined behavior"
      //extern char mango; // this works, as expected
      //extern int mango; // this works, I don't know why
-     //extern float mango;// this doesn't work, I could be sure why.
+     //extern float mango;// this doesn't work, I couldn't be sure why.
 
     // 1."mango" would be substituted by an address value, say <9890>,
     //
