@@ -1,6 +1,7 @@
 /* subscript operator []
  * I just have to try this!
  */
+#include <stdio.h>
 
 int main(void)
 {
